@@ -6,7 +6,6 @@ import setup_lib
 if os.getuid():
     sys.exit('You need root access to install!')
 
-
 os.system('clear')
 print()
 print()

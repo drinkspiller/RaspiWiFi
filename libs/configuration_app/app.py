@@ -16,7 +16,6 @@ def index():
 
     return render_template('app.html', wifi_ap_array = wifi_ap_array, config_hash = config_hash)
 
-
 @app.route('/manual_ssid_entry')
 def manual_ssid_entry():
     return render_template('manual_ssid_entry.html')
@@ -26,14 +25,13 @@ def wpa_settings():
     config_hash = config_file_hash()
     return render_template('wpa_settings.html', wpa_enabled = config_hash['wpa_enabled'], wpa_key = config_hash['wpa_key'])
 
-
 @app.route('/save_credentials', methods = ['GET', 'POST'])
 def save_credentials():
     ssid = request.form['ssid']
     wifi_key = request.form['wifi_key']
 
     create_wpa_supplicant(ssid, wifi_key)
-    
+
     # Call set_ap_client_mode() in a thread otherwise the reboot will prevent
     # the response from getting to the browser
     def sleep_and_start_ap():
@@ -43,7 +41,6 @@ def save_credentials():
     t.start()
 
     return render_template('save_credentials.html', ssid = ssid)
-
 
 @app.route('/save_wpa_credentials', methods = ['GET', 'POST'])
 def save_wpa_credentials():
@@ -65,8 +62,6 @@ def save_wpa_credentials():
 
     config_hash = config_file_hash()
     return render_template('save_wpa_credentials.html', wpa_enabled = config_hash['wpa_enabled'], wpa_key = config_hash['wpa_key'])
-
-
 
 
 ######## FUNCTIONS ##########
